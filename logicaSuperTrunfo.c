@@ -1,71 +1,142 @@
 #include <stdio.h>
 
-int main() {
-	char  estado1, estado2, nome1[20], nome2[20];
-	char  code1[4], code2[4];
-	unsigned long int   population1, population2;
-	int   turismo1, turismo2;
-	float area1, pib1, area2, pib2, pibcapita1, pibcapita2, densidade1, densidade2;
+int main()
+{
+    // Controle switch principal
+    int option;
 
-//estado
-	printf ("INSIRA O ESTADO(DE a A h) DA CIDADE 1:\n");
-	 scanf (" %c", &estado1);
-	printf ("INSIRA O ESTADO(DE a A h) DA CIDADE 2:\n");
-	 scanf (" %c", &estado2);
+    // Controle switch comparação
+    int option2;
 
-//codigo
-	printf ("INSIRA O CÓDIGO DA CIDADE 1: \n");
-	 scanf (" %s", &code1);
-	printf ("INSIRA O CÓDIGO DA CIDADE 2:\n");
-	 scanf (" %s", &code2);
+    // Dados das cartas
+    char country1[20], country2[20];
+    int population1, population2, tourism1, tourism2;
+    float area1, area2, PIB1, PIB2, density1, density2;
 
-//nome
-	printf ("INSIRA O NOME DA CIDADE 1:\n");
-	 scanf (" %s", &nome1);
-	printf ("INSIRA O NOME DA CIDADE 2:\n");
-	 scanf (" %s", &nome2);
+    // Verifica se as cartas foram criadas
+    int cartas = 0;
 
-//populaC'C#o
-	printf ("INSIRA A POPULAÇÃO DA CIDADE 1:\n");
-	 scanf (" %d", &population1);
-	printf ("INSIRA A POPULAÇÃO DA CIDADE 2:\n");
-	 scanf (" %d", &population2);
+    do {
+        // MENU INTERATIVO
+        printf("\n== + ==\n");
+        printf("1 - Criar cartas.\n");
+        printf("2 - Comparar cartas.\n");
+        printf("3 - Sair.\n");
+        scanf("%d", &option);
 
-//area
-	printf ("INSIRA A ÁREA DA CIDADE 1:\n");
-	 scanf (" %f", &area1);
-	printf ("INSIRA A ÁREA DA CIDADE 2:\n");
-	 scanf (" %f", &area2);
+        switch (option) {
+            case 1:
+                // CRIAÇÃO DAS CARTAS
+                printf("== + ==\n");
+                printf("Carta 1: Insira o nome do país:\n");
+                scanf("%s", country1);
+                printf("Carta 2: Insira o nome do país:\n");
+                scanf("%s", country2);
 
-//PIB
-	printf ("INSIRA O PIB DA CIDADE 1:\n");
-	 scanf ("%f", &pib1);
-	printf ("INSIRA O PIB DA CIDADE 2:\n");
-	 scanf ("%f", &pib2);
+                printf("Carta 1: Insira a população:\n");
+                scanf("%d", &population1);
+                printf("Carta 2: Insira a população:\n");
+                scanf("%d", &population2);
 
-//turismo
-	printf ("INSIRA QUANTIDADE DE PONTOS TURCSTICOS DA CIDADE 1:\n");
-	 scanf (" %d", &turismo1);
-	printf ("INSIRA QUANTIDADE DE PONTOS TURCSTICOS DA CIDADE 2:\n");
-	 scanf (" %d", &turismo2);
+                printf("Carta 1: Insira a área:\n");
+                scanf("%f", &area1);
+                printf("Carta 2: Insira a área:\n");
+                scanf("%f", &area2);
 
-	pibcapita1 = pib1 / population1;
-	pibcapita2 = pib2 / population2;
+                printf("Carta 1: Insira o PIB:\n");
+                scanf("%f", &PIB1);
+                printf("Carta 2: Insira o PIB:\n");
+                scanf("%f", &PIB2);
 
-	densidade1 = population1 / area1;
-	densidade2 = population2 / area2;
+                printf("Carta 1: Insira a quantidade de pontos turísticos:\n");
+                scanf("%d", &tourism1);
+                printf("Carta 2: Insira a quantidade de pontos turísticos:\n");
+                scanf("%d", &tourism2);
 
-//comparação
-    printf ("Comparação de cartas: Densidade Populacional\n");
-    printf ("Carta 1 - %s : %.2f \n", nome1, densidade1);
-    printf ("Carta 2 - %s : %.2f \n", nome2, densidade2);
+                // Cálculo da densidade
+                density1 = population1 / area1;
+                density2 = population2 / area2;
 
-    if ( densidade1 < densidade2 ) {
-      printf ("Resultado: Carta 1 (%s) venceu!", nome1);
-    } 
-    else {
-      printf ("Resultado: Carta 2 (%s) venceu!", nome2);
-    }
+                cartas = 1; // cartas criadas
+                break;
+
+            case 2:
+                if (cartas == 0) {
+                    printf("\n== + ==\n");
+                    printf("Crie as cartas primeiro!\n");
+                    break;
+                }
+
+                do {
+                    printf("\n== + ==\n");
+                    printf("Escolha quais dados comparar:\n");
+                    printf("1 - População.\n");
+                    printf("2 - Área.\n");
+                    printf("3 - PIB.\n");
+                    printf("4 - Pontos turísticos.\n");
+                    printf("5 - Densidade demográfica.\n");
+                    printf("6 - Retornar ao menu principal.\n");
+                    scanf("%d", &option2);
+
+                    switch (option2) {
+                        case 1:
+                            if (population1 > population2)
+                                printf("Carta 1 - %s venceu: %d\n", country1, population1);
+                            else
+                                printf("Carta 2 - %s venceu: %d\n", country2, population2);
+                            break;
+
+                        case 2:
+                            if (area1 > area2)
+                                printf("Carta 1 - %s venceu: %.2f\n", country1, area1);
+                            else
+                                printf("Carta 2 - %s venceu: %.2f\n", country2, area2);
+                            break;
+
+                        case 3:
+                            if (PIB1 > PIB2)
+                                printf("Carta 1 - %s venceu: %.2f\n", country1, PIB1);
+                            else
+                                printf("Carta 2 - %s venceu: %.2f\n", country2, PIB2);
+                            break;
+
+                        case 4:
+                            if (tourism1 > tourism2)
+                                printf("Carta 1 - %s venceu: %d\n", country1, tourism1);
+                            else
+                                printf("Carta 2 - %s venceu: %d\n", country2, tourism2);
+                            break;
+
+                        case 5:
+                            if (density1 > density2)
+                                printf("Carta 1 - %s venceu: %.2f\n", country1, density1);
+                            else
+                                printf("Carta 2 - %s venceu: %.2f\n", country2, density2);
+                            break;
+
+                        case 6:
+                            printf("Retornando ao menu principal...\n");
+                            break;
+
+                        default:
+                            printf("Opção inválida! Tente novamente.\n");
+                            break;
+                    }
+
+                } while (option2 != 6); // Fim do menu de comparação
+                break;
+
+            case 3:
+                printf("== + ==\n");
+                printf("Saindo do programa...\n");
+                break;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+
+    } while (option != 3);
 
     return 0;
 }
